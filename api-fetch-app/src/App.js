@@ -1,21 +1,17 @@
-import { useState, useEffect } from "react";
+import useFetch from './useFetch';
 import './App.css';
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
-
+  const {data} = useFetch("https://jsonplaceholder.typicode.com/users");
+  
   return (
     <div className="App">
       <h1>Fetch API React</h1>
       <div className="card">
         <ul>
-          {data?.map((user) => (<li key={user.id}>{user.name}</li>))}
+          {data?.map((user) => (
+            <li key={user.id}>{user.name}</li>
+          ))}
         </ul>
       </div>
     </div>
